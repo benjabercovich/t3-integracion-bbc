@@ -67,7 +67,7 @@ async def handle_query(request: QueryRequest):
 def trigger_load_files():
     try:
         # Run the script as a subprocess
-        result = subprocess.run(["python", "load_files.py"], check=True, capture_output=True, text=True)
+        result = subprocess.run(["python", "load_documents.py"], check=True, capture_output=True, text=True)
         return {"status": "success", "output": result.stdout}
     except subprocess.CalledProcessError as e:
         return {"status": "error", "output": e.stderr}
