@@ -1,0 +1,11 @@
+beautifulsoup4
+requests
+langchain
+langchain_postgres
+pinecone-client
+psycopg2
+pydantic==1.10.12
+fastapi
+uvicorn
+sqlalchemy
+requests
