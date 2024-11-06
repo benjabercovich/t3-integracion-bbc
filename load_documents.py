@@ -19,7 +19,7 @@ def get_embeddings(text_content):
 
 # Replace these values with your actual Render database credentials
 db_user = "peliculas"
-db_password = "8VB3hiOxJDVI8PrIMcloMWWq1CBbE8nz"
+db_password = "8VB3hiOxJDV1P8rlMcIoMWWq1CBbE8nz"
 db_database = "peliculas_h8in"
 db_host = "dpg-cslbs1jv2p9s7383l90g-a"  # Hostname from Render
 db_port = "5432"
