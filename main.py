@@ -1,18 +1,17 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import create_engine, text
+import os
 from rag_pipeline import rag_pipeline
 import subprocess
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000"
-    ]
-
+# Allow all origins for CORS (useful for development; tighten this in production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Allow requests from any origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -21,10 +20,36 @@ app.add_middleware(
 class QueryRequest(BaseModel):
     query: str
 
+# Database connection setup
+DATABASE_URL = "postgresql://peliculas:8VB3hiOxJDV1P8rlMcIoMWWq1CBbE8nz@dpg-cslbs1jv2p9s7383l90g-a/peliculas_h81n"
+engine = create_engine(DATABASE_URL)
+
+# SQL initialization script for PGVector extension and script_embeddings table
+init_script = """
+    CREATE EXTENSION IF NOT EXISTS vector;
+    
+    CREATE TABLE IF NOT EXISTS script_embeddings (
+        id SERIAL PRIMARY KEY,
+        script_name VARCHAR(255),
+        chunk_id INT,
+        content TEXT,
+        embedding VECTOR(768)  
+    );
+"""
+
+def initialize_database():
+    """Initialize the database with required extensions and tables."""
+    with engine.connect() as conn:
+        conn.execute(text(init_script))
+
+# Run database initialization on startup
+@app.on_event("startup")
+async def startup_event():
+    initialize_database()
+
 @app.post("/query")
 async def handle_query(request: QueryRequest):
     query_text = request.query
-
     answer = rag_pipeline(query_text)
 
     if "An error occurred" in answer:

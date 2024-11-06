@@ -8,8 +8,15 @@ VECTOR_DB_NAME = "script_embeddings"
 embed_url = "http://tormenta.ing.puc.cl/api/embed"
 llm_url = "http://tormenta.ing.puc.cl/api/chat"  
 
-# connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
-connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@pgvector_db:{db_port}/{db_database}"
+# Replace these values with your actual Render database credentials
+db_user = "peliculas"
+db_password = "8VB3hiOxJDVI8PrIMcloMWWq1CBbE8nz"
+db_database = "peliculas_h8in"
+db_host = "dpg-cslbs1jv2p9s7383l90g-a"  # Hostname from Render
+db_port = "5432"
+
+connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
+# connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@pgvector_db:{db_port}/{db_database}"
 engine = create_engine(connection_string)
 
 vectorstore = PGVector(
