@@ -7,7 +7,7 @@ function App() {
 
     const handleQuery = async () => {
         try {
-            const result = await axios.post('http://localhost:8000/query', { query });
+            const result = await axios.post('https://t3-integracion-bbc.onrender.com/query', { query });
             setResponse(result.data.response);
         } catch (error) {
             setResponse("Error occurred while querying.");
