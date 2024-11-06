@@ -15,7 +15,7 @@ db_database = "peliculas_h8in"
 db_host = "dpg-cslbs1jv2p9s7383l90g-a"  # Hostname from Render
 db_port = "5432"
 
-connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
+connection_string = f"postgresql://peliculas:8VB3hiOxJDV1P8rlMcIoMWWq1CBbE8nz@dpg-cslbs1jv2p9s7383l90g-a/peliculas_h81n"
 # connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@pgvector_db:{db_port}/{db_database}"
 engine = create_engine(connection_string)
 

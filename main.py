@@ -27,7 +27,7 @@ db_database = "peliculas_h8in"
 db_host = "dpg-cslbs1jv2p9s7383l90g-a"  # Hostname from Render
 db_port = "5432"
 
-DATABASE_URL = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
+DATABASE_URL = f"postgresql://peliculas:8VB3hiOxJDV1P8rlMcIoMWWq1CBbE8nz@dpg-cslbs1jv2p9s7383l90g-a/peliculas_h81n"
 engine = create_engine(DATABASE_URL)
 
 # SQL initialization script for PGVector extension and script_embeddings table
